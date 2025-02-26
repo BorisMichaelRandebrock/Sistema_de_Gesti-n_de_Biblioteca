@@ -7,7 +7,12 @@ opcion 7.
 - Se mantuvo el metodo original de "mostrar" como "mostrarOriginal" para 
 evaluacion en la posicion 8, no reflejada en el menu.
 - Se agrego un metodo estatico get_valid_isbn, que solicita al usuario un ISBN 
-válido, si el ISBN no es un número entero, muestra un mensaje de error."""
+válido, si el ISBN no es un número entero, muestra un mensaje de error.
+Algunas lineas superan los 79 caracteres, pero se mantuvieron para mejorar la
+legibilidad del codigo y o el formato (en el popup).
+En aras de las buenas practicas de programacion (utilizacion del ingles) 
+utilice nombres ingleses donde no tenia predefinidos nombres de los metodos o 
+atributos en el enunciado."""
 
 #Colores de texto en la terminal para ser usado en el programa. a traves de la 
 # syntaxis: f"{COLOR}Texto{RESET}" 
