@@ -71,7 +71,7 @@ class Libro:
         self.titulo = titulo
         self.autor = autor
         self.isbn = isbn
-        self.disponible = disponible # inicializacón como disponible por defecto.
+        self.disponible = disponible # inicialización como disponible por defecto.
 
     def __str__(self): # método que devuelve una cadena con los atributos del 
         # libro, utilizo un operador ternario para mostrar si el libro esta 
@@ -84,9 +84,9 @@ class Libro:
             f"Disponible: {disponible}"
         )
 
-    def agregar(self, biblioteca): # metodo que agrega un libro a la biblioteca,
+    def agregar(self, biblioteca): # método que agrega un libro a la biblioteca,
         # solicita al usuario el titulo, autor y isbn del libro. Se verifica que
-        # el isbn sea un numero entero usando el metodo "get_valid_isbn".
+        # el isbn sea un numero entero usando el método "get_valid_isbn".
         print("\n")
         titulo = input("Título: ")
         autor = input("Autor: ")
@@ -110,7 +110,7 @@ class Libro:
             f"Autor: {YELLOW}{libro.autor}{GREEN} agregado con éxito. {RESET}🥳"
         )
 
-    def prestar(self): # metodo que cambia el estado del libro a no disponible si
+    def prestar(self): # método que cambia el estado del libro a no disponible si
         # el libro esta disponible, de lo contrario muestra un mensaje de error.
         print("\n")
         if self.disponible:
@@ -119,7 +119,7 @@ class Libro:
         else:
             print(f"{RED} \nLibro: {self.titulo} ya está prestado. {RESET} 😱")
 
-    def devolver(self): # metodo que cambia el estado del libro a disponible si el
+    def devolver(self): # método que cambia el estado del libro a disponible si el
         # libro no esta disponible, de lo contrario muestra un mensaje de error.
         print("\n")
         if not self.disponible:
@@ -128,15 +128,15 @@ class Libro:
         else:
             print(f"{RED}\nEl libro: {self.titulo} ya se ha devuelto.{RESET} 😱")
 
-    # a partir de aqui se definen los metodos estaticos de la clase Libro, 
-    # metodos que no requieren una instancia de la clase para ser llamados y por 
-    # tanto no reciben el parametro self.
-    # se definen como estaticos dentro de la clase con el decorador @staticmethod
-    # para mayor cohesion y claridad del codigo.
+    # a partir de aquí se definen los métodos estáticos de la clase Libro, 
+    # metidos que no requieren una instancia de la clase para ser llamados y por 
+    # tanto no reciben el parámetro self.
+    # se definen como estáticos dentro de la clase con el decorador @staticmethod
+    # para mayor cohesion y claridad del código.
 
-    @staticmethod # metodo estatico que elimina todos los libros de la biblioteca.
-    # Esta funcion es un bonus escondido, no se muestra en el menu y se llama con
-    # la opcion 7.
+    @staticmethod # método estático que elimina todos los libros de la biblioteca.
+    # Esta función es un bonus escondido, no se muestra en el menu y se llama con
+    # la opción 7.
     def delete(biblioteca):
         print("\n")
         if not biblioteca:
@@ -149,10 +149,10 @@ class Libro:
             biblioteca.remove(libro)
         print(f"{BLUE}\nTodos los libros han sido eliminados con éxito. {RESET}✟")
 
-    # Methodo mostrar original, -> siguiendo las instrucciones ->
+    # Método mostrar original, -> siguiendo las instrucciones ->
     # como el resultado era algo desordenado a la vista, se opto por una version 
     # mejorada que muestra los libros en forma de tabla.
-    # se mantiene para ser revisionado en la evaluacion
+    # se mantiene para ser revisionado en la evaluación
     @staticmethod
     def mostrarOriginal(biblioteca):
         print("\n")
@@ -162,12 +162,12 @@ class Libro:
             for libro in biblioteca:
                 print(libro)
 
-    @staticmethod # Metodo estatico que muestra todos los libros de la biblioteca
+    @staticmethod # Método estático que muestra todos los libros de la biblioteca
     # en forma de tabla.
     def mostrar(biblioteca):
         print("\n")
         if not biblioteca:# Si no hay libros en la biblioteca, muestra un mensaje
-            # de error y se sale de la funcion
+            # de error y se sale de la función
             print(f"{BLUE}\nNo hay libros en la biblioteca. {RESET} 😢")
         else:
             # Se define el ancho de las columnas de la tabla
@@ -193,7 +193,7 @@ class Libro:
                 disponible = f"{GREEN}Sí{RESET}" if libro.disponible else f"{RED}No{RESET}"
                 print(f"- {titulo} {autor} - ISBN: {isbn} - Disponible: {disponible}")
 
-    @staticmethod # Metodo estatico que busca un libro por ISBN, si el libro no 
+    @staticmethod # Método estático que busca un libro por ISBN, si el libro no 
     # se encuentra, muestra un mensaje de error.
     def buscar(biblioteca, isbn):
         print("\n")
@@ -205,12 +205,12 @@ class Libro:
         print(f"{BLUE}\nLibro con ISBN {isbn} no encontrado. {RESET} 😢")
         return None
 
-    @staticmethod # Metodo estatico que solicita al usuario un ISBN válido, si el
+    @staticmethod # Método estático que solicita al usuario un ISBN válido, si el
     # ISBN no es un número entero, muestra un mensaje de error.
     def get_valid_isbn():
         while True:
             isbn = input(f"\n{YELLOW}Ingresa el ISBN: {RESET}")
-            try:# Utilización un bloque try-except para manejar la excepcion 
+            try:# Utilización un bloque try-except para manejar la excepción 
                 # ValueError que se lanza si el usuario ingresa un ISBN que no es
                 # un numero entero.
                 isbn_int = int(isbn)
@@ -218,12 +218,12 @@ class Libro:
             except ValueError:
                 print(f"\n{RED}El ISBN debe ser un número entero.{RESET} 😡")
 
-    @staticmethod # ultimo metodo estatico de la clase Libro, metodo que ejecuta 
+    @staticmethod # ultimo método estatico de la clase Libro, método que ejecuta 
     # el programa principal.
-    def run_librery():
+    def run_library():
         #  Create a list of books in order to have already some books in the store.
         biblioteca = [# lista de libros predefinidos en la biblioteca, para que 
-            # la libreria sea como tal... una libreria ya con libros.
+            # la librería sea como tal... una librería ya con libros.
             Libro("El Quijote", "Miguel de Cervantes", "12346"),
             Libro("Cien Años de Soledad", "Gabriel García Márquez", "67890"),
             Libro("1984", "George Orwell", "11223"),
@@ -246,42 +246,42 @@ class Libro:
             print(f"{CYAN} 5. {YELLOW} Buscar libro por ISBN{RESET}")
             print(f"{CYAN} 6. {YELLOW} Salir {RESET}")
             print("\n*******************************************************\n")
-            opcion = input(f"{CYAN} \nElige una opción: {RESET}")# Solicita al 
+            option = input(f"{CYAN} \nElige una opción: {RESET}")# Solicita al 
             # usuario que elija una opción. Si no se elige una opción válida 
-            #  (entre 1 y 7 - por la opcion sorpresa), muestra un mensaje de error.
-            # no precisa verificacion de tipo de dato ya qe cualquier ingresado 
+            #  (entre 1 y 7 - por la opción sorpresa), muestra un mensaje de error.
+            # no precisa verificación de tipo de dato ya qe cualquier ingresado 
             #  que no coincide con los valores validos, muestra un mensaje de error.
-            if opcion == "1":# en py no se puede usar switch-case, por lo que se
-                # usa if-elif-else para evaluar la opcion elegida por el usuario.
+            if option == "1":# en py no se puede usar switch-case, por lo que se
+                # usa if-elif-else para evaluar la opción elegida por el usuario.
                 Libro.agregar(Libro, biblioteca)
-            elif opcion == "2":
+            elif option == "2":
                 isbn = Libro.get_valid_isbn()
                 libro = Libro.buscar(biblioteca, isbn)
                 if libro:
                     libro.prestar()
-            elif opcion == "3":
+            elif option == "3":
                 isbn = Libro.get_valid_isbn()
                 libro = Libro.buscar(biblioteca, isbn)
                 if libro:
                     libro.devolver()
-            elif opcion == "4":
+            elif option == "4":
                 Libro.mostrar(biblioteca)
-            elif opcion == "5":
+            elif option == "5":
                 isbn = input(f"{YELLOW}Ingresa el ISBN: {RESET} ")
                 Libro.buscar(biblioteca, isbn)
-            elif opcion == "6":
+            elif option == "6":
                 print(f"{BLUE}\nGracias por usar el Sistema de Gestión de "
                       f"Biblioteca {RESET}")
                 print("\n 😊\n")
                 break
-            elif opcion == "7":
+            elif option == "7":
                 Libro.delete(biblioteca)
-            elif opcion == "8":
+            elif option == "8":
                 Libro.mostrarOriginal(biblioteca)
             else:
                 print(f"{RED}\nOpción inválida. "
                       f"Por favor, elige una opción válida. {RESET} 😡")
 
 
-Libro.run_librery()# Llamada a la funcion run_librery, de la clase Libro para 
+Libro.run_library()# Llamada a la función run_library, de la clase Libro para 
 #ejecutar el programa principal.
