@@ -34,11 +34,12 @@ RESET = "\033[0m"
 import tkinter as tk
 from tkinter import Label, Button
 from time import sleep
+#sudo apt-get install python3-tk
 
 # Función que crea un popup de bienvenida al usuario al inicio del programa
 def introduce():
     root = tk.Tk()
-    root.title("Welcome")
+    root.title("📚")
     root.geometry("1250x750")
     
     # Creación de un mensaje de bienvenida en la ventana tipo popup
@@ -48,7 +49,7 @@ def introduce():
         font=("Arial", 14),
         wraplength=1200
     )
-    message.pack(pady=20)
+    message.pack(pady=10)
     # Creación de un botón para cerrar la ventana
     button = Button(
         root, 
@@ -56,7 +57,10 @@ def introduce():
         command=root.destroy, 
         font=("Arial", 12)
     )
-    button.pack(pady=20)
+    button.pack(pady=10)
+    root.bind("<Return>", lambda event: root.destroy())
+    button.focus_set()
+    button.key = "Return"
     
     # Correr el popup de bienvenida
     root.mainloop()
@@ -128,8 +132,8 @@ class Libro:
         else:
             print(f"{RED}\nEl libro: {self.titulo} ya se ha devuelto.{RESET} 😱")
 
-    # a partir de aquí se definen los métodos estáticos de la clase Libro, 
-    # metidos que no requieren una instancia de la clase para ser llamados y por 
+    # A partir de aquí se definen los métodos estáticos de la clase Libro, 
+    # metodos que no requieren una instancia de la clase para ser llamados y por 
     # tanto no reciben el parámetro self.
     # se definen como estáticos dentro de la clase con el decorador @staticmethod
     # para mayor cohesion y claridad del código.
@@ -229,11 +233,23 @@ class Libro:
             Libro("1984", "George Orwell", "11223"),
             Libro("El Señor de los Anillos", "J.R.R. Tolkien", "44556"),
             Libro("Harry Potter y la Piedra Filosofal", "J.K. Rowling", "77889"),
+            Libro("Harry Potter y la Cámara Secreta", "J.K. Rowling", "77890"),
+            Libro("Harry Potter y el Prisionero de Azkaban", "J.K. Rowling", "77891"),
+            Libro("Harry Potter y el Cáliz de Fuego", "J.K. Rowling", "77892"),
+            Libro("Harry Potter y la Orden del Fénix", "J.K. Rowling", "77893"),
+            Libro("Harry Potter y el Misterio del Príncipe", "J.K. Rowling", "77894"),
+            Libro("H. Potter y las Reliquias de la Muerte", "J.K. Rowling", "77895"),
             Libro("The Hithchiker's Guide to the Galaxy", "Douglas Adams", "33445"),
             Libro("The Catcher in the Rye", "J.D. Salinger", "55678"),
             Libro("The Great Gatsby", "F. Scott Fitzgerald", "99001"),
             Libro("The Da Vinci Code", "Dan Brown", "12239"),
             Libro("The Alchemist", "Paulo Coelho", "93445"),
+            Libro("The Little Prince", "Antoine de Saint-Exupéry", "55679"),
+            Libro("The Hobbit", "J.R.R. Tolkien", "99002"),
+            Libro("The Lion, the Witch and the Wardrobe", "C.S. Lewis", "12240"),
+            Libro("El Pendulo de Foucault", "Umberto Eco", "93446"),
+            Libro("El Nombre de la Rosa", "Umberto Eco", "55680"),
+            Libro("Foucault's Pendulum", "Umberto Eco", "99003"),
         ]
         while True:# bucle infinito que muestra el menu principal del programa y
             # solicita al usuario que elija una opción.
