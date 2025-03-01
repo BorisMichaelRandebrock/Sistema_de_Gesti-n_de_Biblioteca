@@ -161,7 +161,8 @@ class Libro:
         for libro in biblioteca[:]:# se crea una copia de la lista para poder 
             # eliminar los libros de la lista original. iterando sobre la copia
             # de la lista, eliminando el original para no falsear el conteo.
-            print(f"{GREEN}\nLibro: {MAGENTA}{libro.titulo}{GREEN} eliminado con éxito. {RESET} 👾")
+            sleep(0.1)
+            print(f"{GREEN}Libro: {MAGENTA}{libro.titulo}{GREEN} eliminado con éxito. {RESET} 👾")
             biblioteca.remove(libro)
         print(f"{BLUE}\nTodos los libros han sido eliminados con éxito. {RESET}✟")
 
