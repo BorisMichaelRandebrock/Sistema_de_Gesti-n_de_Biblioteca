@@ -31,42 +31,43 @@ CYAN = "\033[96m"
 WHITE = "\033[97m"
 RESET = "\033[0m"
 
-import tkinter as tk
-from tkinter import Label, Button
+# import tkinter as tk
+# from tkinter import Label, Button
 from time import sleep
 #sudo apt-get install python3-tk
 
 # Función que crea un popup de bienvenida al usuario al inicio del programa
-def introduce():
-    root = tk.Tk()
-    root.title("📚")
-    root.geometry("1250x750")
+# def introduce():
+#     root = tk.Tk()
+#     root.title("📚")
+#     root.geometry("1250x750")
     
-    # Creación de un mensaje de bienvenida en la ventana tipo popup
-    message = Label(
-        root,
-        text="\nWelcome to the grand opening of the Library Management System!!!\n\nNos hemos tomado la libertad de añadir una selección de libros a la biblioteca para que puedas empezar a disfrutar de ellos.\n\nFuera de las opciones del menú incluimos 2 opciones adicionales:\n\n1. Eliminar todos los libros de la biblioteca (opción 7)\n2. Mostrar los libros como pedido en el enunciado (opción 8)\n\nEsperamos que disfruten de la lectura y de esta experiencia.\n\nGracias por usar el Sistema de Gestión de Biblioteca. 😊",
-        font=("Arial", 14),
-        wraplength=1200
-    )
-    message.pack(pady=10)
-    # Creación de un botón para cerrar la ventana
-    button = Button(
-        root, 
-        text="Cerrar", 
-        command=root.destroy, 
-        font=("Arial", 12)
-    )
-    button.pack(pady=10)
-    root.bind("<Return>", lambda event: root.destroy())
-    button.focus_set()
-    button.key = "Return"
+#     # Creación de un mensaje de bienvenida en la ventana tipo popup
+#     message = Label(
+#         root,
+#         text="\nWelcome to the grand opening of the Library Management System!!!\n\nNos hemos tomado la libertad de añadir una selección de libros a la biblioteca para que puedas empezar a disfrutar de ellos.\n\nFuera de las opciones del menú incluimos 2 opciones adicionales:\n\n1. Eliminar todos los libros de la biblioteca (opción 7)\n2. Mostrar los libros como pedido en el enunciado (opción 8)\n\nEsperamos que disfruten de la lectura y de esta experiencia.\n\nGracias por usar el Sistema de Gestión de Biblioteca. 😊",
+#         font=("Arial", 14),
+#         wraplength=1200
+#     )
+#     message.pack(pady=10)
+#     # Creación de un botón para cerrar la ventana
+#     button = Button(
+#         root, 
+#         text="Cerrar", 
+#         command=root.destroy, 
+#         font=("Arial", 12)
+#     )
+#     button.pack(pady=10)
+#     root.bind("<Return>", lambda event: root.destroy())
+#     button.focus_set()
+#     button.key = "Return"
     
-    # Correr el popup de bienvenida
-    root.mainloop()
+#     # Correr el popup de bienvenida
+#     root.mainloop()
 
-# Iniciar el popup de bienvenida al principio del programa
-introduce()
+# # Iniciar el popup de bienvenida al principio del programa
+# if __name__ == "__main__":
+#     introduce()
 
 # Definición la clase Libro con los atributos (string) -> titulo, autor, isbn
 # (booleano) -> disponible.
@@ -88,12 +89,47 @@ class Libro:
             f"Disponible: {disponible}"
         )
 
-    def agregar(self, biblioteca): # método que agrega un libro a la biblioteca,
-        # solicita al usuario el titulo, autor y isbn del libro. Se verifica que
-        # el isbn sea un numero entero usando el método "get_valid_isbn".
+
+    def prestar(self): # método que cambia el estado del libro a no disponible si
+        # el libro esta disponible, de lo contrario muestra un mensaje de error.
+        print("\n")
+        if self.disponible:
+            self.disponible = False
+            print(f"{GREEN}\nLibro: {self.titulo} prestado con éxito. {RESET}📚")
+            return True
+        else:
+            print(f"{RED} \nLibro: {self.titulo} ya está prestado. {RESET} 😱")
+            return False
+
+    def devolver(self): # método que cambia el estado del libro a disponible si el
+        # libro no esta disponible, de lo contrario muestra un mensaje de error.
+        print("\n")
+        if not self.disponible:
+            self.disponible = True
+            print(f"{GREEN} \nLibro: {self.titulo} devuelto con éxito.{RESET} 🤓")
+            return True
+        else:
+            print(f"{RED}\nEl libro: {self.titulo} ya se ha devuelto.{RESET} 😱")
+            return False
+
+    # A partir de aquí se definen los métodos estáticos de la clase Libro, 
+    # métodos que no requieren una instancia de la clase para ser llamados y por 
+    # tanto no reciben el parámetro self.
+    # se definen como estáticos dentro de la clase con el decorador @staticmethod
+    # para mayor cohesion y claridad del código.
+
+    @staticmethod # método estático que agrega un libro a la biblioteca, solicita
+    def agregar(biblioteca): # solicita al usuario el titulo, autor y isbn del libro. 
+        # Se verifica que el isbn sea un numero entero usando el método "get_valid_isbn".
         print("\n")
         titulo = input("Título: ")
+        if not titulo:
+            print(f"{RED}\nEl título no puede estar vacío. {RESET} 😡")
+            return
         autor = input("Autor: ")
+        if not autor:
+            print(f"{RED}\nEl autor no puede estar vacío. {RESET} 😡")
+            return
         isbn = Libro.get_valid_isbn()
         for libro in biblioteca:
             if libro.isbn == isbn:
@@ -113,30 +149,6 @@ class Libro:
             f"{GREEN}\nLibro: {YELLOW}{libro.titulo}{GREEN}, "
             f"Autor: {YELLOW}{libro.autor}{GREEN} agregado con éxito. {RESET}🥳"
         )
-
-    def prestar(self): # método que cambia el estado del libro a no disponible si
-        # el libro esta disponible, de lo contrario muestra un mensaje de error.
-        print("\n")
-        if self.disponible:
-            self.disponible = False
-            print(f"{GREEN}\nLibro: {self.titulo} prestado con éxito. {RESET}📚")
-        else:
-            print(f"{RED} \nLibro: {self.titulo} ya está prestado. {RESET} 😱")
-
-    def devolver(self): # método que cambia el estado del libro a disponible si el
-        # libro no esta disponible, de lo contrario muestra un mensaje de error.
-        print("\n")
-        if not self.disponible:
-            self.disponible = True
-            print(f"{GREEN} \nLibro: {self.titulo} devuelto con éxito.{RESET} 🤓")
-        else:
-            print(f"{RED}\nEl libro: {self.titulo} ya se ha devuelto.{RESET} 😱")
-
-    # A partir de aquí se definen los métodos estáticos de la clase Libro, 
-    # metodos que no requieren una instancia de la clase para ser llamados y por 
-    # tanto no reciben el parámetro self.
-    # se definen como estáticos dentro de la clase con el decorador @staticmethod
-    # para mayor cohesion y claridad del código.
 
     @staticmethod # método estático que elimina todos los libros de la biblioteca.
     # Esta función es un bonus escondido, no se muestra en el menu y se llama con
@@ -222,7 +234,7 @@ class Libro:
             except ValueError:
                 print(f"\n{RED}El ISBN debe ser un número entero.{RESET} 😡")
 
-    @staticmethod # ultimo método estatico de la clase Libro, método que ejecuta 
+    @staticmethod # ultimo método estático de la clase Libro, método que ejecuta 
     # el programa principal.
     def run_library():
         #  Create a list of books in order to have already some books in the store.
@@ -247,7 +259,7 @@ class Libro:
             Libro("The Little Prince", "Antoine de Saint-Exupéry", "55679"),
             Libro("The Hobbit", "J.R.R. Tolkien", "99002"),
             Libro("The Lion, the Witch and the Wardrobe", "C.S. Lewis", "12240"),
-            Libro("El Pendulo de Foucault", "Umberto Eco", "93446"),
+            Libro("El Péndulo de Foucault", "Umberto Eco", "93446"),
             Libro("El Nombre de la Rosa", "Umberto Eco", "55680"),
             Libro("Foucault's Pendulum", "Umberto Eco", "99003"),
         ]
@@ -269,7 +281,7 @@ class Libro:
             #  que no coincide con los valores validos, muestra un mensaje de error.
             if option == "1":# en py no se puede usar switch-case, por lo que se
                 # usa if-elif-else para evaluar la opción elegida por el usuario.
-                Libro.agregar(Libro, biblioteca)
+                Libro.agregar(biblioteca)
             elif option == "2":
                 isbn = Libro.get_valid_isbn()
                 libro = Libro.buscar(biblioteca, isbn)
@@ -299,5 +311,6 @@ class Libro:
                       f"Por favor, elige una opción válida. {RESET} 😡")
 
 
-Libro.run_library()# Llamada a la función run_library, de la clase Libro para 
+if __name__ == "__main__":
+    Libro.run_library()# Llamada a la función run_library, de la clase Libro para 
 #ejecutar el programa principal.
